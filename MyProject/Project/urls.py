@@ -15,7 +15,7 @@ urlpatterns = [
 		url(r'^home/cancelreservation/$', views.CancelReservation, name = 'CancelReservation'),
 		url(r'^home/editprofile/$', views.editprofile, name = 'editprofile'),
 		url(r'^termsofservice/$', views.termsofservice, name = 'termsofservice'),
-		url(r'^privacy/$', views.privacy, name = 'privacy')
+		url(r'^privacy/$', views.privacy, name = 'privacy'),
 	
 		#FOR REST_API
 		url(r'^account/$', views.Account_list),
