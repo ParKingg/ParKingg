@@ -8,6 +8,14 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 import datetime
 
+from Project.serializers import AccountSerializer, ParkingLotSerializer, ReserveParkingSerializer, CheckoutTicketSerializer, ReservationFeeSerializer, TransactionHistorySerializer
+from rest_framework import serializers
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+
+
 
 
 Paid = False
@@ -15,6 +23,229 @@ datenow = datetime.date.today()
 timenow = datetime.datetime.now().time()
 now = datetime.datetime.now()
 
+@csrf_exempt
+def TransactionHistory_detail(request, pk):
+	try:
+		TransactionHistorys = TransactionHistory.objects.get(pk=pk)
+	except TransactionHistory.DoesNotExist:
+		return HttpResponse(status=404)
+
+	if request.method == 'GET':
+		serializer = TransactionHistorySerializer(TransactionHistorys)
+		return JsonResponse(serializer.data)
+
+	elif request.method == 'PUT':
+		data = JSONParser().parse(request)
+		serializer = TransactionHistorySerializer(TransactionHistorys, data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data)
+		return JsonResponse(serializer.errors, status=400)
+	elif request.method == 'DELETE':
+		TransactionHistorys.delete()
+		return HttpResponse(status=204)
+
+
+@csrf_exempt
+def TransactionHistory_list(request):
+	if request.method == 'GET':
+		TransactionHistorys = TransactionHistory.objects.all()
+		serializer = TransactionHistorySerializer(TransactionHistorys, many=True)
+		return  JsonResponse(serializer.data, safe=False)
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = TransactionHistorySerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data, status=201)
+		return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def ReservationFee_detail(request, pk):
+	try:
+		ReservationFees = ReservationFee.objects.get(pk=pk)
+	except ReservationFee.DoesNotExist:
+		return HttpResponse(status=404)
+
+	if request.method == 'GET':
+		serializer = ReservationFeeSerializer(ReservationFees)
+		return JsonResponse(serializer.data)
+
+	elif request.method == 'PUT':
+		data = JSONParser().parse(request)
+		serializer = ReservationFeeSerializer(ReservationFees, data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data)
+		return JsonResponse(serializer.errors, status=400)
+	elif request.method == 'DELETE':
+		ReservationFees.delete()
+		return HttpResponse(status=204)
+
+
+@csrf_exempt
+def ReservationFee_list(request):
+	if request.method == 'GET':
+		ReservationFees = ReservationFee.objects.all()
+		serializer = ReservationFeeSerializer(ReservationFees, many=True)
+		return  JsonResponse(serializer.data, safe=False)
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = ReservationFeeSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data, status=201)
+		return JsonResponse(serializer.errors, status=400)
+
+
+
+@csrf_exempt
+def CheckoutTicket_detail(request, pk):
+	try:
+		CheckoutTickets = CheckoutTicket.objects.get(pk=pk)
+	except CheckoutTicket.DoesNotExist:
+		return HttpResponse(status=404)
+
+	if request.method == 'GET':
+		serializer = CheckoutTicketSerializer(CheckoutTickets)
+		return JsonResponse(serializer.data)
+
+	elif request.method == 'PUT':
+		data = JSONParser().parse(request)
+		serializer = CheckoutTicketSerializer(CheckoutTickets, data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data)
+		return JsonResponse(serializer.errors, status=400)
+	elif request.method == 'DELETE':
+		CheckoutTickets.delete()
+		return HttpResponse(status=204)
+
+
+@csrf_exempt
+def CheckoutTicket_list(request):
+	if request.method == 'GET':
+		CheckoutTickets = CheckoutTicket.objects.all()
+		serializer = CheckoutTicketSerializer(CheckoutTickets, many=True)
+		return  JsonResponse(serializer.data, safe=False)
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = CheckoutTicketSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data, status=201)
+		return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def ReserveParking_detail(request, pk):
+	try:
+		ReserveParkings = ReserveParking.objects.get(pk=pk)
+	except ReserveParking.DoesNotExist:
+		return HttpResponse(status=404)
+
+	if request.method == 'GET':
+		serializer = ReserveParkingSerializer(ReserveParkings)
+		return JsonResponse(serializer.data)
+
+	elif request.method == 'PUT':
+		data = JSONParser().parse(request)
+		serializer = ReserveParkingSerializer(ReserveParkings, data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data)
+		return JsonResponse(serializer.errors, status=400)
+	elif request.method == 'DELETE':
+		ReserveParkings.delete()
+		return HttpResponse(status=204)
+
+
+@csrf_exempt
+def ReserveParking_list(request):
+	if request.method == 'GET':
+		ReserveParkings = ReserveParking.objects.all()
+		serializer = ReserveParkingSerializer(ReserveParkings, many=True)
+		return  JsonResponse(serializer.data, safe=False)
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = ReserveParkingSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data, status=201)
+		return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def ParkingLot_list(request):
+	if request.method == 'GET':
+		ParkingLots = ParkingLot.objects.all()
+		serializer = ParkingLotSerializer(ParkingLots, many=True)
+		return  JsonResponse(serializer.data, safe=False)
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = ParkingLotSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data, status=201)
+		return JsonResponse(serializer.errors, status=400)
+@csrf_exempt
+def ParkingLot_detail(request, pk):
+	try:
+		ParkingLots = ParkingLot.objects.get(pk=pk)
+	except ParkingLot.DoesNotExist:
+		return HttpResponse(status=404)
+
+	if request.method == 'GET':
+		serializer = ParkingLotSerializer(ParkingLots)
+		return JsonResponse(serializer.data)
+
+	elif request.method == 'PUT':
+		data = JSONParser().parse(request)
+		serializer = ParkingLotSerializer(ParkingLots, data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data)
+		return JsonResponse(serializer.errors, status=400)
+	elif request.method == 'DELETE':
+		ParkingLots.delete()
+		return HttpResponse(status=204)
+
+
+
+@csrf_exempt
+def Account_list(request):
+	if request.method == 'GET':
+		Accounts = Account.objects.all()
+		serializer = AccountSerializer(Accounts, many=True)
+		return  JsonResponse(serializer.data, safe=False)
+	elif request.method == 'POST':
+		data = JSONParser().parse(request)
+		serializer = AccountSerializer(data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data, status=201)
+		return JsonResponse(serializer.errors, status=400)
+@csrf_exempt
+def Account_detail(request, pk):
+	try:
+		account = Account.objects.get(pk=pk)
+	except Account.DoesNotExist:
+		return HttpResponse(status=404)
+
+	if request.method == 'GET':
+		serializer = AccountSerializer(account)
+		return JsonResponse(serializer.data)
+
+	elif request.method == 'PUT':
+		data = JSONParser().parse(request)
+		serializer = AccountSerializer(account, data=data)
+		if serializer.is_valid():
+			serializer.save()
+			return JsonResponse(serializer.data)
+		return JsonResponse(serializer.errors, status=400)
+	elif request.method == 'DELETE':
+		account.delete()
+		return HttpResponse(status=204)
 
 
 @csrf_exempt
