@@ -28,7 +28,7 @@ SECRET_KEY = '#%s((v=xakyao357_9b&*k$x3ca$p-gvf8^ix^5pcbzva58gd5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['Gulaman.pythonanywhere.com']
 
 
 # Application definition
