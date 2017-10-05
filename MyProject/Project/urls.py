@@ -16,6 +16,20 @@ urlpatterns = [
 		url(r'^home/editprofile/$', views.editprofile, name = 'editprofile'),
 		url(r'^termsofservice/$', views.termsofservice, name = 'termsofservice'),
 		url(r'^privacy/$', views.privacy, name = 'privacy')
+	
+		#FOR REST_API
+		url(r'^account/$', views.Account_list),
+		url(r'^account/(?P<pk>[0-9]/$)',views.Account_detail),
+		url(r'^parkinglot/$', views.ParkingLot_list),
+		url(r'^parkinglot/(?P<pk>[0-9]/$)',views.ParkingLot_detail),
+		url(r'^reserveparking/$', views.ReserveParking_list),
+		url(r'^reserveparking/(?P<pk>[0-9]/$)',views.ReserveParking_detail),
+		url(r'^checkoutticket/$', views.CheckoutTicket_list),
+		url(r'^checkoutticket/(?P<pk>[0-9]/$)',views.CheckoutTicket_detail),
+		url(r'^reservationfee/$', views.ReservationFee_list),
+		url(r'^reservationfee/(?P<pk>[0-9]/$)',views.ReservationFee_detail),
+		url(r'^transactionhistory/$', views.TransactionHistory_list),
+		url(r'^transactionhistory/(?P<pk>[0-9]/$)',views.TransactionHistory_detail)
 		# url(r'^home/(?P<pk>\d+)$', views.profile(model = Account) )
 
 
