@@ -525,9 +525,10 @@ background-image: url('error.png');
       font-family: 'Work Sans';
     }
       #forms1 {
-      margin-left: 1089px;
-      margin-top: -2px;
-      height: 58%;
+    margin-left: 1290px;
+    margin-top: -2px;
+    height: 58%;
+    margin-right: 183px;
 
       }
 
