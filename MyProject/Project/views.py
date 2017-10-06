@@ -861,7 +861,7 @@ def payment_process(request):
 			paypal_dict = {
 
 			"business" : settings.PAYPAL_RECEIVER_EMAIL,
-			"amount" : "50",
+			"amount" : "1",
 			"item_name" : "Reservation Fee",
 			"invoice" : str(order_id), #This will be serve as invoice number the User_id_id.
 			'currency_code' : 'PHP',
