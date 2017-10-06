@@ -1,5 +1,5 @@
    body {
-    font-family: 'Bitter';
+    font-family: 'Work Sans';
     /*color: white;*/
     color: black;
     margin: 0;
@@ -157,6 +157,22 @@
   }
 
 }
+@media screen and (max-height: 1080px) and (min-device-height: 1080px) {
+
+  .head{
+    margin-left: 256px;
+  }
+
+}
+@media screen and (max-height: 900px) and (min-device-height:900px) {
+
+  .head {
+    margin-left: 372px;
+  }
+
+}
+
+
 
 
 
