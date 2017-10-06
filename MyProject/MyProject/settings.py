@@ -147,7 +147,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-PAYPAL_TEST = False
+PAYPAL_TEST = True
 
 PAYPAL_RECEIVER_EMAIL = "parking.payments1@gmail.com"
 
